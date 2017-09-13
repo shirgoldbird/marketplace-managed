@@ -4,6 +4,7 @@ import Login from './components/Login/Login.js';
 import logo from './logo.svg';
 import './App.css';
 import Airtable from 'airtable';
+import Form from './components/Form/Form';
 import { mapColumns } from './utils/mapColumns';
 
 const base = new Airtable({ apiKey: process.env.REACT_APP_AIRTABLE_API_KEY })
@@ -59,6 +60,7 @@ class App extends Component {
             <Route path="/login" component={Login} />
           </div>
         </Router>
+        <Form exhibitorData={this.state.currentUser} />
       </div>
     );
   }
