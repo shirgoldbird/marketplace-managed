@@ -11,21 +11,37 @@ const base = new Airtable({ apiKey: process.env.REACT_APP_AIRTABLE_API_KEY })
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { boothName: "loading ... " };
-    this.getVendorName = this.getVendorName.bind(this);
+    this.state = { currentUser: {} };
+    // this.getVendorName = this.getVendorName.bind(this);
+    this.getExhibitorInfo = this.getExhibitorInfo.bind(this);
   }
 
-  getVendorName() {
-    base('Vendors').find('recqBFqpY2GFpaI5h').then(record => {
-      this.setState({ boothName: record.fields["Booth Name"] });
-      return record;
-    }).catch(err => {
-      // Handle error.
+  // getVendorName() {
+  //   base('Exhibitors').find('recqBFqpY2GFpaI5h').then(record => {
+  //     this.setState({ boothName: record.fields["Booth Name"] });
+  //     return record;
+  //   }).catch(err => {
+  //     // Handle error.
+  //   });
+  // }
+
+  getExhibitorInfo() {
+    let boothName = 'Sheva & Josh 500 Years';
+    let phoneNumber = '7813338151';
+    let email = 'shevadas@gmail.com';
+    let loginFormula = `({Booth Name} = '${boothName}') & ({Phone Number} = '${phoneNumber}') & ({Email Address} = '${email}')`;
+
+    base('Exhibitors').select({
+      filterByFormula: loginFormula,
+      maxRecords: 1
+    }).firstPage((err, records) => {
+      if (err) { console.error(err); return; }
+      this.setState({ currentUser: records[0].fields });
     });
   }
 
   componentDidMount() {
-     this.getVendorName();
+    this.getExhibitorInfo();
   }
 
   render() {
@@ -34,7 +50,7 @@ class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
-          <h3>{this.state.boothName}</h3>
+          <h3>{this.state.currentUser ? this.state.currentUser["Booth Name"] : null }</h3>
         </div>
 
         <Router>
