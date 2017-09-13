@@ -4,7 +4,7 @@ import Login from './components/Login/Login.js';
 import logo from './logo.svg';
 import './App.css';
 import Airtable from 'airtable';
-import mapColumns from './utils/mapColumns';
+import { mapColumns } from './utils/mapColumns';
 
 const base = new Airtable({ apiKey: process.env.REACT_APP_AIRTABLE_API_KEY })
                             .base(process.env.REACT_APP_AIRTABLE_BASE);
