@@ -4,6 +4,7 @@ import Login from './components/Login/Login.js';
 import logo from './logo.svg';
 import './App.css';
 import Airtable from 'airtable';
+import mapColumns from './utils/mapColumns';
 
 const base = new Airtable({ apiKey: process.env.REACT_APP_AIRTABLE_API_KEY })
                             .base(process.env.REACT_APP_AIRTABLE_BASE);
@@ -36,7 +37,7 @@ class App extends Component {
       maxRecords: 1
     }).firstPage((err, records) => {
       if (err) { console.error(err); return; }
-      this.setState({ currentUser: records[0].fields });
+      this.setState({ currentUser: mapColumns(records[0].fields) });
     });
   }
 
@@ -50,7 +51,7 @@ class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
-          <h3>{this.state.currentUser ? this.state.currentUser["Booth Name"] : null }</h3>
+          <h3>{this.state.currentUser ? this.state.currentUser.boothName : null }</h3>
         </div>
 
         <Router>
