@@ -8,13 +8,13 @@ import Login from './Login/Login';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
-    false ? (
-      <Component {...props} />
+    store.getState().isAuthenticated ? (
+      <Component {...props}/>
     ) : (
       <Redirect to={{
         pathname: '/login',
         state: { from: props.location }
-      }} />
+      }}/>
     )
   )} />
 );
@@ -24,6 +24,10 @@ const store = createStore(
   applyMiddleware(thunk)
 );
 
+const Sample = () => (
+  <h1>Hi!</h1>
+);
+
 const Root = () => (
   <Provider store={store}>
     <Router>
@@ -31,7 +35,7 @@ const Root = () => (
         <Link to="/login">Login</Link>
         <Link to="/protected">Some Inside Page</Link>
         <Route path="/login" component={Login} />
-        <PrivateRoute path="/protected" render={() => (<h1>Hi!</h1>)} />
+        <PrivateRoute path="/protected" component={Sample} />
       </div>
     </Router>
   </Provider>
