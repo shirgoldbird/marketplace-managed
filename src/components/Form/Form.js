@@ -34,7 +34,7 @@ class Form extends Component {
                 <p>{jsToAirtable[field]}: </p>
                 <select disabled='true' name={field} key={field}>
                 {/* this doesn't work and I'm not sure why */}
-                {this.props.exhibitorData[field].forEach(item => {
+                {this.props.exhibitorData[field].map(item => {
                   console.log(item);
                   return <option value={item} key={item}>{item}</option>;
                   }
