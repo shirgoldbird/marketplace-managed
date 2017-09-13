@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Login from './components/Login/Login.js';
 import logo from './logo.svg';
 import './App.css';
 import Airtable from 'airtable';
@@ -34,8 +36,12 @@ class App extends Component {
           <h2>Welcome to React</h2>
           <h3>{this.state.boothName}</h3>
         </div>
-        <p className="App-intro">
-        </p>
+
+        <Router>
+          <div className="App-body">
+            <Route path="/login" component={Login} />
+          </div>
+        </Router>
       </div>
     );
   }
