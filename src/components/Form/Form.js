@@ -27,15 +27,13 @@ class Form extends Component {
   render() {
     return (
       <form className="Form" onSubmit={this.onSubmit}>
-        {Object.keys(this.props.exhibitorData).map(field => {
+        {Object.keys(this.props.exhibitorData).map((field, i) => {
           if (Array.isArray(this.props.exhibitorData[field])) {
             return (
-              <div>
+              <div key={i}>
                 <p>{jsToAirtable[field]}: </p>
                 <select disabled='true' name={field} key={field}>
-                {/* this doesn't work and I'm not sure why */}
                 {this.props.exhibitorData[field].map(item => {
-                  console.log(item);
                   return <option value={item} key={item}>{item}</option>;
                   }
                 )}
@@ -44,7 +42,7 @@ class Form extends Component {
             );
           }
           return (
-            <div>
+            <div key={i}>
               <p>{jsToAirtable[field]}: </p>
               <input
               onChange={this.onChange}
@@ -52,7 +50,7 @@ class Form extends Component {
               key={field}
               type='text'
               placeholder={jsToAirtable[field]}
-              value={this.props.exhibitorData[field]} />
+              value={this.state[field] || this.props.exhibitorData[field]} />
             </div>
           );
         })}
