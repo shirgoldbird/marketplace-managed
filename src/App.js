@@ -38,7 +38,7 @@ class App extends Component {
       maxRecords: 1
     }).firstPage((err, records) => {
       if (err) { console.error(err); return; }
-      this.setState({ currentUser: mapColumns(records[0].fields) });
+      this.setState({ currentUser: mapColumns(records[0].fields), id: records[0].id });
     });
   }
 
