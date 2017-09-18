@@ -22,7 +22,8 @@ export function login(data) {
       const loginFormula = `AND({Legal Name} = '${legalName}', {Email Address} = '${email}', {ZIP/Postal Code} = '${zip}')`;
  
       connection('Vendors').select({
-        filterByFormula: loginFormula
+        filterByFormula: loginFormula,
+        maxRecords: 1
       }).firstPage((err, records) => {
         if (err) {
           reject(dispatch(setCurrentUser({})))
