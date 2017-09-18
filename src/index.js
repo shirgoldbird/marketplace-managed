@@ -1,30 +1,36 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { ConnectedRouter as Router } from 'react-router-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import store, { history } from './store';
 import registerServiceWorker from './registerServiceWorker';
 import App from './components/App';
-import Login from './components/Login/Login';
+import LoginPage from './pages/Login';
 import PrivateRoute from './components/PrivateRoute';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
-const Sample = () => (
-  <h1>Private {this.props.email}!</h1>
-);
+const sampleGenerator = (name) => {
+  return () => (
+    <h1>{name}</h1>
+  );
+};
+
+const Home = sampleGenerator('Home');
+const Protected = sampleGenerator('Protected');
 
 const router = (
   <Provider store={store}>
     <Router history={history}>
       <App>
         <Switch>
-          <PrivateRoute exact path="/" render={Sample} />
-          <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/protected" render={Sample} />
+          <Route exact path="/home" component={Home} />
+          <Redirect exact from="/" to="/home" />
+          <Route exact path="/login" component={LoginPage} />
+          <PrivateRoute exact path="/protected" component={Protected} />
         </Switch>
       </App>
     </Router>
