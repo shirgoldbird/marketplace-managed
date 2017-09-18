@@ -17,12 +17,12 @@ export function logout(data) {
 export function login(data) {
   return dispatch => {
     return new Promise((resolve, reject) => {
-      const { boothName, phoneNumber, email } = data;
-      const loginFormula = `({Booth Name} = '${boothName}') & ({Phone Number} = '${phoneNumber}') & ({Email Address} = '${email}')`;
+      const { legalName, email, zip } = data;
 
+      const loginFormula = `AND({Legal Name} = '${legalName}', {Email Address} = '${email}', {ZIP/Postal Code} = '${zip}')`;
+ 
       connection('Vendors').select({
-        filterByFormula: loginFormula,
-        maxRecords: 1
+        filterByFormula: loginFormula
       }).firstPage((err, records) => {
         if (err) {
           reject(dispatch(setCurrentUser({})))

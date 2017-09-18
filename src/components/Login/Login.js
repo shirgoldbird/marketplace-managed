@@ -8,9 +8,9 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      boothName: '',
+      legalName: '',
       email: '',
-      phoneNumber: '',
+      zipCode: '',
       isLoading: false
     };
 
@@ -44,7 +44,7 @@ class Login extends Component {
       <form className="Login" ref="form" onSubmit={this.onSubmit}>
         <input
           onChange={this.onChange}
-          name="boothName"
+          name="legalName"
           type="text"
           placeholder="Legal name" />
         <input
@@ -54,9 +54,9 @@ class Login extends Component {
           placeholder="Email Address" />
         <input
           onChange={this.onChange}
-          name="phoneNumber"
-          type="tel"
-          placeholder="Phone Number" />
+          name="zip"
+          type="text"
+          placeholder="ZIP/Postal Code" />
         <input type="submit" value="Login" />
       </form>
     );
