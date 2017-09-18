@@ -14,7 +14,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
 const Sample = () => (
-  <h1>Private!</h1>
+  <h1>Private {this.props.email}!</h1>
 );
 
 const router = (
@@ -22,9 +22,9 @@ const router = (
     <Router history={history}>
       <App>
         <Switch>
-          <PrivateRoute exact path="/" component={Sample} />
+          <PrivateRoute exact path="/" render={Sample} />
           <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/protected" component={Sample} />
+          <PrivateRoute exact path="/protected" render={Sample} />
         </Switch>
       </App>
     </Router>

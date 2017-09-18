@@ -8,9 +8,9 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      name: '',
+      boothName: '',
       email: '',
-      phone: '',
+      phoneNumber: '',
       isLoading: false
     };
 
@@ -21,8 +21,15 @@ class Login extends Component {
   onSubmit(ev) {
     ev.preventDefault();
 
-    this.props.login(this.state).then(data => {
+    this.setState({
+      isLoading: true
+    });
 
+    this.props.login(this.state).then(data => {
+      this.refs.form.reset();
+      this.setState({
+        isLoading: false
+      });
     });
   }
 
@@ -34,10 +41,10 @@ class Login extends Component {
 
   render() {
     return (
-      <form className="Login" onSubmit={this.onSubmit}>
+      <form className="Login" ref="form" onSubmit={this.onSubmit}>
         <input
           onChange={this.onChange}
-          name="name"
+          name="boothName"
           type="text"
           placeholder="Legal name" />
         <input
@@ -47,7 +54,7 @@ class Login extends Component {
           placeholder="Email Address" />
         <input
           onChange={this.onChange}
-          name="phone"
+          name="phoneNumber"
           type="tel"
           placeholder="Phone Number" />
         <input type="submit" value="Login" />
