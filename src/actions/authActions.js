@@ -20,7 +20,9 @@ export function login(data) {
       const { legalName, email, zip } = data;
 
       const loginFormula = `AND({Legal Name} = '${legalName}', {Email Address} = '${email}', {ZIP/Postal Code} = '${zip}')`;
- 
+
+      // TODO: figure out how to deal with allowing both vendors and artists to log in before the tables are combined
+      // maybe we just don't let artists log in before they're selected for AA and we add them to a central "Exhibitor" table
       connection('Vendors').select({
         filterByFormula: loginFormula,
         maxRecords: 1
