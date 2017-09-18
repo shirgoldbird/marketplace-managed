@@ -10,6 +10,9 @@ import App from './components/App';
 import Login from './components/Login/Login';
 import PrivateRoute from './components/PrivateRoute';
 
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
+
 const Sample = () => (
   <h1>Private!</h1>
 );
