@@ -17,6 +17,11 @@ class Navigation extends Component {
   render() {
     return (
       <Nav bsStyle="tabs" activeKey={this.state.selected} onSelect={this.handleSelect}>
+        <LinkContainer to="/login">
+          <NavItem>
+            Login
+          </NavItem>
+        </LinkContainer>
         <LinkContainer to="/home">
           <NavItem>
             Home

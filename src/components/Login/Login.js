@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
+import validate from 'validate.js';
 import { login } from '../../actions/authActions';
+import FormField from '../FormField';
 import './Login.css';
 
 class Login extends Component {
@@ -14,6 +17,20 @@ class Login extends Component {
       isLoading: false
     };
 
+    this.stateValidation = {
+      legalName: {
+        presence: true
+      },
+      email: {
+        email: true
+      },
+      zipCode: {
+        length: {
+          minimum: 5
+        }
+      }
+    };
+
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
@@ -21,16 +38,22 @@ class Login extends Component {
   onSubmit(ev) {
     ev.preventDefault();
 
-    this.setState({
-      isLoading: true
-    });
-
-    this.props.login(this.state).then(data => {
-      this.refs.form.reset();
+    if (!validate(this.state, this.stateValidation)) {
       this.setState({
-        isLoading: false
+        isLoading: true
       });
-    });
+
+      this.props.login(this.state).then(data => {
+        this.refs.form.reset();
+        this.setState({
+          isLoading: false
+        });
+      }).catch(() => {
+        this.setState({
+          isLoading: false
+        });
+      });
+    }
   }
 
   onChange(ev) {
@@ -39,25 +62,45 @@ class Login extends Component {
     });
   }
 
+  checkValidation(prop) {
+    const validation = validate(this.state, this.stateValidation);
+
+    if (validation[prop] && validation[prop].length) {
+      return 'error';
+    }
+
+    return 'success';
+  }
+
   render() {
     return (
       <form className="Login" ref="form" onSubmit={this.onSubmit}>
-        <input
+        <FormField
           onChange={this.onChange}
+          checkValidation={this.checkValidation.bind(this, 'legalName')}
           name="legalName"
           type="text"
-          placeholder="Legal name" />
-        <input
+          label="Legal name"
+          placeholder="Sheva Goldberg" />
+        <FormField
           onChange={this.onChange}
+          checkValidation={this.checkValidation.bind(this, 'email')}
           name="email"
           type="email"
-          placeholder="Email Address" />
-        <input
+          label="Email Address"
+          placeholder="example@gmail.com" />
+        <FormField
           onChange={this.onChange}
-          name="zip"
+          checkValidation={this.checkValidation.bind(this, 'zipCode')}
+          name="zipCode"
           type="text"
-          placeholder="ZIP/Postal Code" />
-        <input type="submit" value="Login" />
+          label="ZIP/Postal Code"
+          placeholder="60606" />
+        <Button
+          type="submit"
+          disabled={this.state.isLoading}>
+          Login
+        </Button>
       </form>
     );
   }
