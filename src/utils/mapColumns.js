@@ -21,7 +21,8 @@ export const airtableToJs = {
   "Feel free to use this space to provide any additional information on your selection of goods.": 'additionalMerchInfo',
   "Email Address": 'email',
   "Remaining Badges": 'remainingBadges',
-  "Badge Amount Due": 'badgeAmountDue'
+  "Badge Amount Due": 'badgeAmountDue',
+  "Application Status": 'applicationStatus'
 }
 
 function swap(obj){

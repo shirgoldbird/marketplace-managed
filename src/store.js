@@ -1,4 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import { persistStore, autoRehydrate } from 'redux-persist';
 import thunk from 'redux-thunk';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory'
@@ -36,7 +37,12 @@ const enhancer = composeEnhancers(
 const store = createStore(
   rootReducer,
   defaultState,
-  enhancer
+  enhancer,
+  compose(
+    autoRehydrate()
+  )
 );
+
+export const persistor = persistStore(store, {whitelist: ['auth']});
 
 export default store;
