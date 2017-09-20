@@ -1,4 +1,5 @@
 import _isEmpty from 'lodash/isEmpty';
+import { REHYDRATE } from 'redux-persist/constants'
 
 const initialState = {
   isAuthenticated: false,
@@ -12,7 +13,12 @@ export default (state = initialState, action = {}) => {
         isAuthenticated: !_isEmpty(action.user),
         user: action.user
       };
-    default: 
+    case REHYDRATE:
+      return {
+        ...state,
+        ...action.payload.auth
+      };
+    default:
       return state;
   }
 }
