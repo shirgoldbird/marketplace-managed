@@ -8,6 +8,8 @@ import store, { history } from './store';
 import registerServiceWorker from './registerServiceWorker';
 import App from './components/App';
 import LoginPage from './pages/Login';
+import LogoutPage from './pages/Logout';
+import HomePage from './pages/Home';
 import PrivateRoute from './components/PrivateRoute';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -19,7 +21,6 @@ const sampleGenerator = (name) => {
   );
 };
 
-const Home = sampleGenerator('Home');
 const Protected = sampleGenerator('Protected');
 
 const router = (
@@ -27,7 +28,7 @@ const router = (
     <Router history={history}>
       <App>
         <Switch>
-          <Route exact path="/home" component={Home} />
+          <Route exact path="/home" component={HomePage} />
           <Redirect exact from="/" to="/home" />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/logout" component={LogoutPage} />
