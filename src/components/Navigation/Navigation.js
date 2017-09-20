@@ -42,8 +42,8 @@ class Navigation extends Component {
           </LinkContainer>
         )}
         {isAuthenticated && (
-          <LinkContainer to="/foo">
-            <NavItem>
+          <LinkContainer to="/portal">
+            <NavItem eventKey={4}>
               Exhibitor Portal
             </NavItem>
           </LinkContainer>

@@ -10,6 +10,7 @@ import App from './components/App';
 import LoginPage from './pages/Login';
 import LogoutPage from './pages/Logout';
 import HomePage from './pages/Home';
+import Portal from './components/Portal/Portal';
 import PrivateRoute from './components/PrivateRoute';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -32,6 +33,7 @@ const router = (
           <Redirect exact from="/" to="/home" />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/logout" component={LogoutPage} />
+          <Route exact path="/portal" component={Portal} />
           <PrivateRoute exact path="/protected" component={Protected} />
         </Switch>
       </App>
