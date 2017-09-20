@@ -50,8 +50,8 @@ class Navigation extends Component {
           </LinkContainer>
         )}
         {isAuthenticated && (
-          <LinkContainer to="/bar">
-            <NavItem>
+          <LinkContainer to="/contact">
+            <NavItem eventKey={5}>
               Contact Us
             </NavItem>
           </LinkContainer>
