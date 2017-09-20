@@ -1,5 +1,7 @@
 import connection from '../airtable';
 import { mapColumns } from '../utils/mapColumns';
+import { push } from 'react-router-redux'
+import store from '../store';
 
 export function setCurrentUser(user) {
   return {
@@ -17,9 +19,9 @@ export function logout(data) {
 export function login(data) {
   return dispatch => {
     return new Promise((resolve, reject) => {
-      const { legalName, email, zip } = data;
+      const { legalName, email, zipCode } = data;
 
-      const loginFormula = `AND({Legal Name} = '${legalName}', {Email Address} = '${email}', {ZIP/Postal Code} = '${zip}')`;
+      const loginFormula = `AND({Legal Name} = '${legalName}', {Email Address} = '${email}', {ZIP/Postal Code} = '${zipCode}')`;
 
       // TODO: figure out how to deal with allowing both vendors and artists to log in before the tables are combined
       // maybe we just don't let artists log in before they're selected for AA and we add them to a central "Exhibitor" table
@@ -36,6 +38,7 @@ export function login(data) {
           resolve(dispatch(setCurrentUser({
             ...mapColumns(records[0].fields)
           })));
+          store.dispatch(push('/protected'));
         }
       });
     });

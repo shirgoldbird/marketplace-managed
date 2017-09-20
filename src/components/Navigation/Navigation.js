@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -15,36 +16,50 @@ class Navigation extends Component {
   }
 
   render() {
+    const isAuthenticated = this.props.auth.isAuthenticated;
+
     return (
       <Nav bsStyle="tabs" activeKey={this.state.selected} onSelect={this.handleSelect}>
-        <LinkContainer to="/login">
-          <NavItem>
-            Login
-          </NavItem>
-        </LinkContainer>
-        <LinkContainer to="/home">
-          <NavItem>
-            Home
-          </NavItem>
-        </LinkContainer>
-        <LinkContainer to="/protected">
-          <NavItem>
-            My Application
-          </NavItem>
-        </LinkContainer>
-        <LinkContainer to="/foo">
-          <NavItem>
-            Exhibitor Portal
-          </NavItem>
-        </LinkContainer>
-        <LinkContainer to="/bar">
-          <NavItem>
-            Contact Us
-          </NavItem>
-        </LinkContainer>
+        {!isAuthenticated && (
+          <LinkContainer to="/login">
+            <NavItem>
+              Login
+            </NavItem>
+          </LinkContainer>
+        )}
+        {isAuthenticated && (
+          <LinkContainer to="/home">
+            <NavItem>
+              Home
+            </NavItem>
+          </LinkContainer>
+        )}
+        {isAuthenticated && (
+          <LinkContainer to="/protected">
+            <NavItem>
+              My Application
+            </NavItem>
+          </LinkContainer>
+        )}
+        {isAuthenticated && (
+          <LinkContainer to="/foo">
+            <NavItem>
+              Exhibitor Portal
+            </NavItem>
+          </LinkContainer>
+        )}
+        {isAuthenticated && (
+          <LinkContainer to="/bar">
+            <NavItem>
+              Contact Us
+            </NavItem>
+          </LinkContainer>
+        )}
       </Nav>
     );
   }
 }
 
-export default Navigation;
+export default connect(state => ({
+  auth: state.auth
+}))(Navigation);

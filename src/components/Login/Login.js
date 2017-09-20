@@ -65,16 +65,16 @@ class Login extends Component {
   checkValidation(prop) {
     const validation = validate(this.state, this.stateValidation);
 
-    if (validation[prop] && validation[prop].length) {
+    if (validation && validation[prop] && validation[prop].length) {
       return 'error';
     }
 
-    return 'success';
+    return null;
   }
 
   render() {
     return (
-      <form className="Login" ref="form" onSubmit={this.onSubmit}>
+      <form className="Login" ref="form" onSubmit={this.onSubmit} disabled={this.state.isLoading}>
         <FormField
           onChange={this.onChange}
           checkValidation={this.checkValidation.bind(this, 'legalName')}
@@ -97,8 +97,7 @@ class Login extends Component {
           label="ZIP/Postal Code"
           placeholder="60606" />
         <Button
-          type="submit"
-          disabled={this.state.isLoading}>
+          type="submit">
           Login
         </Button>
       </form>
