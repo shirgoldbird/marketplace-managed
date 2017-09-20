@@ -30,6 +30,7 @@ const router = (
           <Route exact path="/home" component={Home} />
           <Redirect exact from="/" to="/home" />
           <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/logout" component={LogoutPage} />
           <PrivateRoute exact path="/protected" component={Protected} />
         </Switch>
       </App>

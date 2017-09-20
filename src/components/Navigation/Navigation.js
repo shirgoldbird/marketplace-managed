@@ -55,6 +55,13 @@ class Navigation extends Component {
             </NavItem>
           </LinkContainer>
         )}
+        {isAuthenticated && (
+          <LinkContainer to="/logout">
+            <NavItem>
+              Log Out
+            </NavItem>
+          </LinkContainer>
+        )}
       </Nav>
     );
   }
