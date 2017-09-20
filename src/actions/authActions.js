@@ -1,7 +1,5 @@
 import connection from '../airtable';
 import { mapColumns } from '../utils/mapColumns';
-import { push } from 'react-router-redux'
-import store from '../store';
 
 export function setCurrentUser(user) {
   return {
@@ -38,7 +36,6 @@ export function login(data) {
           resolve(dispatch(setCurrentUser({
             ...mapColumns(records[0].fields)
           })));
-          store.dispatch(push('/protected'));
         }
       });
     });
