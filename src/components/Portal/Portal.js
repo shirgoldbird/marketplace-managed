@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Glyphicon } from 'react-bootstrap';
 import connection from '../../airtable';
+import Loading from '../Loading/Loading';
 import './Portal.css';
 
 class Portal extends Component {
@@ -12,7 +12,7 @@ class Portal extends Component {
 
   componentDidMount() {
     connection('Documents').select().all().then(records => {
-      this.setState({ links: records });
+      this.setState({ loading: false, links: records });
     }).catch(err => {
      console.log('error', err)
     });
@@ -21,22 +21,26 @@ class Portal extends Component {
   render() {
     return (
       <div>
-        <p>View or download this year's exhibitor documentation here.</p>
-        <ul>
-        {this.state.links.map((link) => {
-          if (link.fields["Link"]) {
-            return (
-              <li className="portal-link" key={link.id}>
-                <a href={link.fields["Link"]} target="_blank">{link.fields["Name"]}</a>
-                {link.fields["Notes"] ? <ul><li>{link.fields["Notes"]}</li></ul> : null}
-                {/* <Glyphicon className="portal-download" glyph="download-alt" /> */}
-              </li>
-            );
-          } else {
-            return null;
-          }
-        })}
-        </ul>
+        {this.state.loading ? <Loading /> :
+          <div>
+            <p>View or download this year's exhibitor documentation here.</p>
+            <ul>
+              {this.state.links.map((link) => {
+                if (link.fields["Link"]) {
+                  return (
+                    <li className="portal-link" key={link.id}>
+                      <a href={link.fields["Link"]} target="_blank">{link.fields["Name"]}</a>
+                      {link.fields["Notes"] ? <ul><li>{link.fields["Notes"]}</li></ul> : null}
+                      {/* <Glyphicon className="portal-download" glyph="download-alt" /> */}
+                    </li>
+                  );
+                } else {
+                  return null;
+                }
+              })}
+            </ul>
+          </div>
+        }
       </div>
     );
   }
