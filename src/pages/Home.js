@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Deadlines from '../components/Deadlines/Deadlines';
 
 class HomePage extends Component {
   render() {
@@ -10,8 +11,10 @@ class HomePage extends Component {
       <div id="homepage">
         {isAuthenticated && (
           <div>
-            <p>Welcome, {user.legalName.split(" ")[0]}!</p>
+            <h3>Welcome, {user.legalName.split(" ")[0]}!</h3>
             <p>Your application status is: {user.applicationStatus}</p>
+
+            <Deadlines />
           </div>
         )}
       </div>
