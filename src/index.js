@@ -41,7 +41,7 @@ const router = (
       </App>
     </Router>
   </Provider>
-)
+);
 
 render(router, document.getElementById('root'));
 registerServiceWorker();
