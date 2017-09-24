@@ -1,6 +1,6 @@
 // Takes an Exhibitor object from Airtable and renames the columns to something sane
 
-export const airtableToJs = {
+const airtableToJS = {
   "Secondary Websites": 'otherWebsites',
   "Country": 'country',
   "What forms of payment do you plan on accepting?": 'paymentTypes',
@@ -33,9 +33,9 @@ function swap(obj){
   return ret;
 }
 
-export const jsToAirtable = swap(airtableToJs);
+const jsToAirtable = swap(airtableToJS);
 
-export function mapColumns(obj, columnMap=airtableToJs) {
+function mapColumns(obj, columnMap=airtableToJS) {
   let newObj = {};
 
   Object.keys(obj).map(item => {
@@ -49,3 +49,10 @@ export function mapColumns(obj, columnMap=airtableToJs) {
 
   return newObj;
 }
+
+
+module.exports = {
+  mapColumns,
+  jsToAirtable,
+  airtableToJS
+};
