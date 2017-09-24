@@ -1,12 +1,10 @@
 const express = require('express');
-const cors = require('cors');
 const router = express.Router();
 
 const connection = require('../airtable');
 const mapColumns = require('../utils/mapColumns').mapColumns;
 
 router.post('/login', (req, res) => {
-  console.log(req);
   const { legalName, email, zipCode } = req.body;
   const loginFormula = `
     AND({Legal Name} = '${legalName}', 

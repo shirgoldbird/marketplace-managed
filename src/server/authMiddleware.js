@@ -1,5 +1,4 @@
 const WHITELISTED_PATHS = [
-  '/',
   '/auth/login',
   '/auth/logout'
 ];

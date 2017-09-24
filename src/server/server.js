@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 
 const authMiddleware = require('./authMiddleware');
 const auth = require('./controllers/auth');
+const documents = require('./controllers/documents');
+const deadlines = require('./controllers/deadlines');
 
 const app = express();
 const PORT_NUMBER = 8081;
@@ -23,6 +25,8 @@ app.use(authMiddleware);
 
 // Routes
 app.use('/auth', cors(), auth);
+app.use('/documents', cors(), documents);
+app.use('/deadlines', cors(), deadlines);
 
 const server = app.listen(PORT_NUMBER, () => {
   const { port } = server.address();
