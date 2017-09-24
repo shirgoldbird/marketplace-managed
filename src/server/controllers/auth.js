@@ -11,7 +11,7 @@ router.post('/login', (req, res) => {
     {Email Address} = '${email}', 
     {ZIP/Postal Code} = '${zipCode}')
   `;
-  console.log(loginFormula);
+
   // TODO: figure out how to deal with allowing both vendors and artists to log in before the tables are combined
   // maybe we just don't let artists log in before they're selected for AA and we add them to a central "Exhibitor" table
   connection('Vendors').select({

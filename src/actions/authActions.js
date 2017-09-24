@@ -33,8 +33,7 @@ export function login(data) {
         }
 
         throw new Error('Response not JSON');
-      }).then((data) => {
-        const { user } = data;
+      }).then(({ user }) => {
         dispatch(setCurrentUser(user));
       }).catch((err) => {
         dispatch(setCurrentUser({}));
