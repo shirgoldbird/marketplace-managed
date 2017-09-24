@@ -1,46 +1,21 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import { Table } from 'react-bootstrap';
+import { fetchDeadlines } from '../../actions/deadlineActions';
 import Loading from '../Loading/Loading';
 import './Deadlines.css';
 
 class Deadlines extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { 
-      loading: true,
-      deadlines: []
-    };
-  }
-
   componentDidMount() {
-    axios.get('http://localhost:8081/deadlines', {
-      withCredentials: true
-    }).then((response) => {
-      const { deadlines } = response.data;
-      this.setState({ 
-        loading: false,
-        deadlines: deadlines.sort((a, b) => {
-          if (a["Due Date"] > b["Due Date"]) { 
-            return 1; 
-          }
-          else if (a["Due Date"] < b["Due Date"]) { 
-            return -1; 
-          }
-          return 0;
-        })
-      });
-    }).catch((err) => {
-     console.log('error', err);
-    });
+    this.props.dispatch(fetchDeadlines());
   }
 
   render() {
+    const { isFetching, items } = this.props;
     return (
       <div>
         <h3>Upcoming Deadlines</h3>
-        {this.state.loading ? <Loading /> :
+        {isFetching ? <Loading /> :
           <Table>
             <thead>
               <tr>
@@ -50,7 +25,7 @@ class Deadlines extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.deadlines.map((deadline, i) => {
+              {items.map((deadline, i) => {
                 if (deadline["Deadline"]) {
                   return (
                     <tr className="deadline" key={i}>
@@ -72,4 +47,17 @@ class Deadlines extends Component {
   }
 }
 
-export default Deadlines;
+function mapStateToProps(state) {
+  const { deadline } = state;
+  const {
+    isFetching,
+    items
+  } = deadline;
+
+  return {
+    isFetching,
+    items
+  }
+}
+
+export default connect(mapStateToProps)(Deadlines);

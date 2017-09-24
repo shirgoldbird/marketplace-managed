@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { fetchDocuments } from '../../actions/documentActions';
 import Loading from '../Loading/Loading';
 import './Portal.css';
 
@@ -14,27 +15,18 @@ class Portal extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8081/documents', {
-      withCredentials: true
-    }).then((response) => {
-      const { documents } = response.data;
-      this.setState({
-        loading: false,
-        links: documents
-      });
-    }).catch((err) => {
-     console.log('error', err);
-    });
+    this.props.dispatch(fetchDocuments());
   }
 
   render() {
+    const { isFetching, items } = this.props;
     return (
       <div>
-        {this.state.loading ? <Loading /> :
+        {isFetching ? <Loading /> :
           <div>
             <p>View or download this year's exhibitor documentation here.</p>
             <ul>
-              {this.state.links.map((link) => {
+              {items.map((link) => {
                 if (link["Link"]) {
                   return (
                     <li className="portal-link" key={link.id}>
@@ -55,4 +47,17 @@ class Portal extends Component {
   }
 }
 
-export default Portal;
+function mapStateToProps(state) {
+  const { document } = state;
+  const {
+    isFetching,
+    items
+  } = document;
+
+  return {
+    isFetching,
+    items
+  }
+}
+
+export default connect(mapStateToProps)(Portal);

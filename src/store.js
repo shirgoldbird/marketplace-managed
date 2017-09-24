@@ -11,6 +11,14 @@ const defaultState = {
   auth: {
     isAuthenticated: false,
     user: {}
+  },
+  deadline: {
+    isFetching: false,
+    items: []
+  },
+  document: {
+    isFetching: false,
+    items: []
   }
 };
 
