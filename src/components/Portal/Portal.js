@@ -35,11 +35,11 @@ class Portal extends Component {
             <p>View or download this year's exhibitor documentation here.</p>
             <ul>
               {this.state.links.map((link) => {
-                if (link.fields["Link"]) {
+                if (link["Link"]) {
                   return (
                     <li className="portal-link" key={link.id}>
-                      <a href={link.fields["Link"]} target="_blank">{link.fields["Name"]}</a>
-                      {link.fields["Notes"] ? <ul><li>{link.fields["Notes"]}</li></ul> : null}
+                      <a href={link["Link"]} target="_blank">{link["Name"]}</a>
+                      {link["Notes"] ? <ul><li>{link["Notes"]}</li></ul> : null}
                       {/* <Glyphicon className="portal-download" glyph="download-alt" /> */}
                     </li>
                   );

@@ -7,7 +7,10 @@ const mapColumns = require('../utils/mapColumns').mapColumns;
 router.get('/', (req, res) => {
   connection('Documents').select().all().then((records) => {
     res.json({
-      documents: records.map(record => record.fields)
+      documents: records.map(record => ({
+        id: record.id,
+        ...record.fields
+      }))
     });
   });
 });

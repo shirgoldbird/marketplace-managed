@@ -22,10 +22,10 @@ class Deadlines extends Component {
       this.setState({ 
         loading: false,
         deadlines: deadlines.sort((a, b) => {
-          if (a.fields["Due Date"] > b.fields["Due Date"]) { 
+          if (a["Due Date"] > b["Due Date"]) { 
             return 1; 
           }
-          else if (a.fields["Due Date"] < b.fields["Due Date"]) { 
+          else if (a["Due Date"] < b["Due Date"]) { 
             return -1; 
           }
           return 0;
@@ -51,12 +51,12 @@ class Deadlines extends Component {
             </thead>
             <tbody>
               {this.state.deadlines.map((deadline, i) => {
-                if (deadline.fields["Deadline"]) {
+                if (deadline["Deadline"]) {
                   return (
                     <tr className="deadline" key={i}>
-                      <td>{deadline.fields["Deadline"]}</td>
-                      <td>{deadline.fields["Due Date"]}</td>
-                      <td>{deadline.fields["Notes"]}</td>
+                      <td>{deadline["Deadline"]}</td>
+                      <td>{deadline["Due Date"]}</td>
+                      <td>{deadline["Notes"]}</td>
                     </tr>
                   );
                 } else {
