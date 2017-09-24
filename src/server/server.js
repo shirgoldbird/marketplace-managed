@@ -18,15 +18,20 @@ const SESSION = {
   resave: true
 };
 
+const CORS_CONFIG = {
+  credentials: true,
+  origin: 'http://localhost:3000'
+};
+
 // Middleware
 app.use(session(SESSION));
 app.use(bodyParser.json());
 app.use(authMiddleware);
 
 // Routes
-app.use('/auth', cors(), auth);
-app.use('/documents', cors(), documents);
-app.use('/deadlines', cors(), deadlines);
+app.use('/auth', cors(CORS_CONFIG), auth);
+app.use('/documents', cors(CORS_CONFIG), documents);
+app.use('/deadlines', cors(CORS_CONFIG), deadlines);
 
 const server = app.listen(PORT_NUMBER, () => {
   const { port } = server.address();

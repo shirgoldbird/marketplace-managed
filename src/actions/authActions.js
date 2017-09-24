@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export function setCurrentUser(user) {
   return {
     type: 'SET_CURRENT_USER',
@@ -16,24 +18,14 @@ export function login(data) {
     return new Promise((resolve, reject) => {
       const { legalName, email, zipCode } = data;
 
-      fetch('http://localhost:8081/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          legalName,
-          email,
-          zipCode
-        })
+      axios.post('http://localhost:8081/auth/login', {
+        legalName,
+        email,
+        zipCode
+      }, {
+        withCredentials: true
       }).then((response) => {
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-          return response.json();
-        }
-
-        throw new Error('Response not JSON');
-      }).then(({ user }) => {
+        const { user } = response.data
         dispatch(setCurrentUser(user));
       }).catch((err) => {
         dispatch(setCurrentUser({}));

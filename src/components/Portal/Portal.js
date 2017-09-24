@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import connection from '../../airtable';
+import axios from 'axios';
 import Loading from '../Loading/Loading';
 import './Portal.css';
 
@@ -7,14 +7,23 @@ class Portal extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { loading: true, links: [] };
+    this.state = {
+      loading: true,
+      links: []
+    };
   }
 
   componentDidMount() {
-    connection('Documents').select().all().then(records => {
-      this.setState({ loading: false, links: records });
-    }).catch(err => {
-     console.log('error', err)
+    axios.get('http://localhost:8081/documents', {
+      withCredentials: true
+    }).then((response) => {
+      const { documents } = response.data;
+      this.setState({
+        loading: false,
+        links: documents
+      });
+    }).catch((err) => {
+     console.log('error', err);
     });
   }
 

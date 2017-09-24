@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import connection from '../../airtable';
+import axios from 'axios';
 import { Table } from 'react-bootstrap';
 import Loading from '../Loading/Loading';
 import './Deadlines.css';
@@ -8,18 +8,31 @@ class Deadlines extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { loading: true, deadlines: [] };
+    this.state = { 
+      loading: true,
+      deadlines: []
+    };
   }
 
   componentDidMount() {
-    connection('Deadlines').select().all().then(records => {
-      this.setState({ loading: false, deadlines: records.sort((a, b) => {
-        if (a.fields["Due Date"] > b.fields["Due Date"]) { return 1; }
-        else if (a.fields["Due Date"] < b.fields["Due Date"]) { return -1; }
-        return 0;
-      })});
-    }).catch(err => {
-     console.log('error', err)
+    axios.get('http://localhost:8081/deadlines', {
+      withCredentials: true
+    }).then((response) => {
+      const { deadlines } = response.data;
+      this.setState({ 
+        loading: false,
+        deadlines: deadlines.sort((a, b) => {
+          if (a.fields["Due Date"] > b.fields["Due Date"]) { 
+            return 1; 
+          }
+          else if (a.fields["Due Date"] < b.fields["Due Date"]) { 
+            return -1; 
+          }
+          return 0;
+        })
+      });
+    }).catch((err) => {
+     console.log('error', err);
     });
   }
 

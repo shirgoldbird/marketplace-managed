@@ -6,7 +6,9 @@ const mapColumns = require('../utils/mapColumns').mapColumns;
 
 router.get('/', (req, res) => {
   connection('Deadlines').select().all().then((deadlines) => {
-    res.json(deadlines.map(deadline => deadline.fields));
+    res.json({
+      deadlines: deadlines.map(deadline => deadline.fields)
+    });
   });
 });
 
