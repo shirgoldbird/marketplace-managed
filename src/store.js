@@ -3,24 +3,9 @@ import { persistStore, autoRehydrate } from 'redux-persist';
 import thunk from 'redux-thunk';
 import { routerMiddleware } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory'
-// import the root reducer
-import rootReducer from './reducers/index';
+// import the root reducer and default state of the app
+import rootReducer, { defaultState } from './reducers/index';
 
-// Create an object for the default data
-const defaultState = {
-  auth: {
-    isAuthenticated: false,
-    user: {}
-  },
-  deadline: {
-    isFetching: false,
-    items: []
-  },
-  document: {
-    isFetching: false,
-    items: []
-  }
-};
 
 // Create a history of your choosing (we're using a browser history in this case)
 export const history = createHistory();

@@ -3,7 +3,7 @@ import {
   RECEIVE_DEADLINES
 } from '../actions/deadlineActions';
 
-const initialState = {
+export const initialState = {
   isFetching: false,
   items: []
 };

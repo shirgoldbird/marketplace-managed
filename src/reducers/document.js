@@ -3,7 +3,7 @@ import {
   RECEIVE_DOCUMENTS
 } from '../actions/documentActions';
 
-const initialState = {
+export const initialState = {
   isFetching: false,
   items: []
 };

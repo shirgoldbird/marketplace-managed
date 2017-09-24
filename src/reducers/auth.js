@@ -2,7 +2,7 @@ import _isEmpty from 'lodash/isEmpty';
 import { SET_CURRENT_USER } from '../actions/deadlineActions';
 import { REHYDRATE } from 'redux-persist/constants'
 
-const initialState = {
+export const initialState = {
   isAuthenticated: false,
   user: {}
 };
