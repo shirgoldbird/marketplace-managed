@@ -7,17 +7,21 @@ import './Navigation.css';
 class Navigation extends Component {
   constructor(props) {
     super(props);
-    this.state = { selected: 1 };
+    this.state = {
+      selected: 1
+    };
 
     this.handleSelect = this.handleSelect.bind(this);
   }
 
   handleSelect(selectedKey) {
-    this.setState({ selected: selectedKey });
+    this.setState({
+      selected: selectedKey
+    });
   }
 
   render() {
-    const isAuthenticated = this.props.auth.isAuthenticated;
+    const { isAuthenticated } = this.props.auth;
 
     return (
       <Nav bsStyle="tabs" activeKey={this.state.selected} onSelect={this.handleSelect}>

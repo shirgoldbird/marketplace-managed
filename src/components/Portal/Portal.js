@@ -5,15 +5,6 @@ import Loading from '../Loading/Loading';
 import './Portal.css';
 
 class Portal extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loading: true,
-      links: []
-    };
-  }
-
   componentDidMount() {
     this.props.dispatch(fetchDocuments());
   }
