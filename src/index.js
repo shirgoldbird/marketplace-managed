@@ -8,7 +8,6 @@ import store, { history } from './store';
 import registerServiceWorker from './registerServiceWorker';
 import App from './components/App';
 import LoginPage from './pages/Login';
-import LogoutPage from './pages/Logout';
 import HomeContainer from './containers/HomeContainer';
 import Portal from './components/Portal/Portal';
 import Contact from './components/Contact/Contact';

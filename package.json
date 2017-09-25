@@ -4,7 +4,7 @@
   "private": true,
   "description": "A layer over Airtable to manage BronyCon's Exhibitor Hall.",
   "scripts": {
-    "start": "npm-run-all start-server start-react",
+    "start": "run-p start-server start-react",
     "start-react": "react-scripts start",
     "start-server": "node src/server/server.js",
     "build": "react-scripts build",
