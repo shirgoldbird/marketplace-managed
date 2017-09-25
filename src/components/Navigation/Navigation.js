@@ -8,13 +8,15 @@ import './Navigation.css';
 
 const LoggedOutView = (props) => {
   return (
-    <Nav {...props}>
-      <LinkContainer to="/login">
-        <NavItem eventKey={1}>
-          Login
-        </NavItem>
-      </LinkContainer>
-    </Nav>
+    <Navbar.Collapse>
+      <Nav {...props} pullRight>
+        <LinkContainer to="/login">
+          <NavItem eventKey={1}>
+            Login
+          </NavItem>
+        </LinkContainer>
+      </Nav>
+    </Navbar.Collapse>
   );
 }
 
@@ -24,26 +26,30 @@ const LoggedInView = (props) => {
     ...rest
   } = props;
   return (
-    <Nav {...rest}>
-      <LinkContainer to="/protected">
-        <NavItem eventKey={1}>
-          My Application
+    <Navbar.Collapse>
+      <Nav {...rest}>
+        <LinkContainer to="/protected">
+          <NavItem eventKey={1}>
+            My Application
+          </NavItem>
+        </LinkContainer>
+        <LinkContainer to="/portal">
+          <NavItem eventKey={2}>
+            Exhibitor Portal
+          </NavItem>
+        </LinkContainer>
+        <LinkContainer to="/contact">
+          <NavItem eventKey={3}>
+            Contact Us
+          </NavItem>
+        </LinkContainer>
+      </Nav>
+      <Nav pullRight>
+        <NavItem onClick={logout}>
+          Log Out
         </NavItem>
-      </LinkContainer>
-      <LinkContainer to="/portal">
-        <NavItem eventKey={2}>
-          Exhibitor Portal
-        </NavItem>
-      </LinkContainer>
-      <LinkContainer to="/contact">
-        <NavItem eventKey={3}>
-          Contact Us
-        </NavItem>
-      </LinkContainer>
-      <NavItem onClick={logout}>
-        Log Out
-      </NavItem>
-    </Nav>
+      </Nav>
+    </Navbar.Collapse>
   )
 }
 
