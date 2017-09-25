@@ -29,7 +29,7 @@ const router = (
     <Router history={history}>
       <App>
         <Switch>
-          <Route exact path="/home" component={HomeContainer} />
+          <PrivateRoute exact path="/home" component={HomeContainer} />
           <Redirect exact from="/" to="/home" />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/contact" component={Contact} />
