@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchDeadlines } from '../actions/deadlineActions';
 import Deadlines from '../components/Deadlines/Deadlines';
 
 class HomePage extends Component {
+  componentDidMount() {
+    this.props.dispatch(fetchDeadlines());
+  }
   render() {
-    const isAuthenticated = this.props.auth.isAuthenticated;
-    const user = this.props.auth.user;
+    const {
+      isAuthenticated,
+      user,
+      isFetching,
+      items
+    } = this.props;
 
     return (
       <div id="homepage">
@@ -14,7 +22,7 @@ class HomePage extends Component {
             <h3>Welcome, {user.legalName.split(" ")[0]}!</h3>
             <p>Your application status is: {user.applicationStatus}</p>
 
-            <Deadlines />
+            <Deadlines isFetching={isFetching} items={items} />
           </div>
         )}
       </div>
@@ -22,6 +30,25 @@ class HomePage extends Component {
   }
 }
 
-export default connect(state => ({
-  auth: state.auth
-}))(HomePage);
+function mapStateToProps(state) {
+  const { auth, deadline } = state;
+
+  const {
+    isFetching,
+    items
+  } = deadline;
+
+  const {
+    isAuthenticated,
+    user
+  } = auth
+
+  return {
+    isFetching,
+    items,
+    isAuthenticated,
+    user
+  }
+}
+
+export default connect(mapStateToProps)(HomePage);

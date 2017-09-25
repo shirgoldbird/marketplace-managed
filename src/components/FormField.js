@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 
 class FormField extends Component {
@@ -59,6 +60,14 @@ class FormField extends Component {
       </FormGroup>
     );
   }
+}
+
+FormField.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  helpBlock: PropTypes.string,
+  checkValidation: PropTypes.func,
+  onChange: PropTypes.func
 }
 
 FormField.defaultProps = {

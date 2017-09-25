@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchDocuments } from '../../actions/documentActions';
 import Loading from '../Loading/Loading';
@@ -36,6 +37,11 @@ class Portal extends Component {
       </div>
     );
   }
+}
+
+Portal.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  items: PropTypes.array.isRequired
 }
 
 function mapStateToProps(state) {

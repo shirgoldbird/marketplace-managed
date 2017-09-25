@@ -25,9 +25,7 @@
     "url": "https://github.com/ShevaDas/exhibitor-management/issues"
   },
   "homepage": "http://shevagoldberg.com/",
-  "devDependencies": {
-
-  },
+  "devDependencies": {},
   "dependencies": {
     "airtable": "^0.5.0",
     "axios": "^0.16.2",
@@ -38,6 +36,7 @@
     "express-session": "^1.15.5",
     "history": "^4.7.2",
     "lodash": "^4.17.4",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.3",
     "react-dom": "^15.6.1",

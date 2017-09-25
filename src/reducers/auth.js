@@ -1,5 +1,5 @@
 import _isEmpty from 'lodash/isEmpty';
-import { SET_CURRENT_USER } from '../actions/deadlineActions';
+import { SET_CURRENT_USER } from '../actions/authActions';
 import { REHYDRATE } from 'redux-persist/constants'
 
 export const initialState = {

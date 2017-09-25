@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Table } from 'react-bootstrap';
 import { fetchDeadlines } from '../../actions/deadlineActions';
@@ -6,10 +7,6 @@ import Loading from '../Loading/Loading';
 import './Deadlines.css';
 
 class Deadlines extends Component {
-  componentDidMount() {
-    this.props.dispatch(fetchDeadlines());
-  }
-
   render() {
     const { isFetching, items } = this.props;
     return (
@@ -47,17 +44,9 @@ class Deadlines extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { deadline } = state;
-  const {
-    isFetching,
-    items
-  } = deadline;
+Deadlines.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  items: PropTypes.array.isRequired
+};
 
-  return {
-    isFetching,
-    items
-  }
-}
-
-export default connect(mapStateToProps)(Deadlines);
+export default Deadlines;
