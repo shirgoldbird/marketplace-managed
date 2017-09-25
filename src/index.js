@@ -7,11 +7,11 @@ import { Provider } from 'react-redux';
 import store, { history } from './store';
 import registerServiceWorker from './registerServiceWorker';
 import App from './components/App';
-import LoginPage from './pages/Login';
+import LoginContainer from './containers/LoginContainer';
 import HomeContainer from './containers/HomeContainer';
 import Portal from './components/Portal/Portal';
 import Contact from './components/Contact/Contact';
-import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from './containers/PrivateRoute';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
@@ -31,7 +31,7 @@ const router = (
         <Switch>
           <PrivateRoute exact path="/home" component={HomeContainer} />
           <Redirect exact from="/" to="/home" />
-          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/login" component={LoginContainer} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/portal" component={Portal} />
           <PrivateRoute exact path="/protected" component={Protected} />

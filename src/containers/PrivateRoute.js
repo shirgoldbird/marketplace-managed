@@ -4,7 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
-    rest.auth.isAuthenticated ? (
+    rest.isAuthenticated ? (
       <Component {...props}/>
     ) : (
       <Redirect to={{
@@ -15,6 +15,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   )} />
 );
 
-export default connect(state => ({
-  auth: state.auth
-}), { })(PrivateRoute);
+function mapStateToProps(state) {
+  const { auth } = state;
+  const { isAuthenticated } = auth;
+
+  return {
+    isAuthenticated
+  };
+}
+
+export default connect(mapStateToProps)(PrivateRoute);

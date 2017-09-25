@@ -1,14 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-bootstrap';
 
-import Navigation from './Navigation/Navigation';
+import NavigationContainer from '../containers/NavigationContainer';
 
 const App = ({...props}) => (
   <Grid>
     <Row>
       <Col>
-        <Navigation />
+        <NavigationContainer />
       </Col>
     </Row>
     <Row>

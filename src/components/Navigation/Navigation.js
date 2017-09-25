@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { logout } from '../../actions/authActions';
 import './Navigation.css';
 
 const LoggedOutView = (props) => {
@@ -66,7 +65,7 @@ class Navigation extends Component {
   }
 
   render() {
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated, logout } = this.props;
 
     return (
       <Navbar collapseOnSelect>
@@ -82,7 +81,7 @@ class Navigation extends Component {
           {
             isAuthenticated ? (
               <LoggedInView
-                logout={this.props.logout} />
+                logout={logout} />
             ) : (
               <LoggedOutView />
             )
@@ -93,19 +92,9 @@ class Navigation extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { auth } = state;
-  const { isAuthenticated } = auth;
+Navigation.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired
+};
 
-  return {
-    isAuthenticated
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    logout: () => dispatch(logout())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+export default Navigation;

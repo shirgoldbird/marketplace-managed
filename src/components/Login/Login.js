@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import validate from 'validate.js';
-import { login } from '../../actions/authActions';
+
 import FormField from '../FormField';
 import './Login.css';
 
@@ -43,7 +43,7 @@ class Login extends Component {
         isLoading: true
       });
 
-      this.props.login(this.state).then(data => {
+      this.props.login(this.state).then((data) => {
         this.refs.form.reset();
         this.setState({
           isLoading: false
@@ -105,4 +105,8 @@ class Login extends Component {
   }
 }
 
-export default connect(null, { login })(Login);
+Login.propTypes = {
+  login: PropTypes.func.isRequired
+}
+
+export default Login;
