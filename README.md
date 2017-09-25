@@ -39,6 +39,9 @@ It should be running on localhost:3000.
 
 MORE TO COME SOON???
 
+## Roadmap
+[Check it out!](https://docs.google.com/document/d/1a1S1LoKzIzgyF_PXAvsOJ61l8HTJKE1SwUg5w210kak/edit)
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
