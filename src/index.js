@@ -33,7 +33,6 @@ const router = (
           <Route exact path="/home" component={HomeContainer} />
           <Redirect exact from="/" to="/home" />
           <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/logout" component={LogoutPage} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/portal" component={Portal} />
           <PrivateRoute exact path="/protected" component={Protected} />

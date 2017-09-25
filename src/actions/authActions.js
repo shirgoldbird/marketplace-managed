@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { history } from '../store.js';
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
@@ -12,26 +13,25 @@ export function setCurrentUser(user) {
 export function logout(data) {
   return dispatch => {
     dispatch(setCurrentUser({}));
+    history.push('/login');
   }
 };
 
 export function login(data) {
+  const { legalName, email, zipCode } = data;
   return dispatch => {
-    return new Promise((resolve, reject) => {
-      const { legalName, email, zipCode } = data;
-
-      axios.post('http://localhost:8081/auth/login', {
-        legalName,
-        email,
-        zipCode
-      }, {
-        withCredentials: true
-      }).then((response) => {
-        const { user } = response.data
-        dispatch(setCurrentUser(user));
-      }).catch((err) => {
-        dispatch(setCurrentUser({}));
-      });
+    return axios.post('http://localhost:8081/auth/login', {
+      legalName,
+      email,
+      zipCode
+    }, {
+      withCredentials: true
+    }).then((response) => {
+      const { user } = response.data
+      dispatch(setCurrentUser(user));
+      history.push('/home');
+    }).catch((err) => {
+      dispatch(setCurrentUser({}));
     });
   }
 };

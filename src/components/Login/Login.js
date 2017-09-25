@@ -48,7 +48,6 @@ class Login extends Component {
         this.setState({
           isLoading: false
         });
-        this.props.history.push('/home');
       }).catch(() => {
         this.setState({
           isLoading: false

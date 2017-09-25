@@ -1,12 +1,57 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Nav, NavItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
+
+import { logout } from '../../actions/authActions';
 import './Navigation.css';
+
+const LoggedOutView = (props) => {
+  return (
+    <Nav {...props}>
+      <LinkContainer to="/login">
+        <NavItem eventKey={1}>
+          Login
+        </NavItem>
+      </LinkContainer>
+    </Nav>
+  );
+}
+
+const LoggedInView = (props) => {
+  const { 
+    logout,
+    ...rest
+  } = props;
+  return (
+    <Nav {...rest}>
+      <LinkContainer to="/protected">
+        <NavItem eventKey={1}>
+          My Application
+        </NavItem>
+      </LinkContainer>
+      <LinkContainer to="/portal">
+        <NavItem eventKey={2}>
+          Exhibitor Portal
+        </NavItem>
+      </LinkContainer>
+      <LinkContainer to="/contact">
+        <NavItem eventKey={3}>
+          Contact Us
+        </NavItem>
+      </LinkContainer>
+      <NavItem onClick={logout}>
+        Log Out
+      </NavItem>
+    </Nav>
+  )
+}
 
 class Navigation extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       selected: 1
     };
@@ -21,57 +66,46 @@ class Navigation extends Component {
   }
 
   render() {
-    const { isAuthenticated } = this.props.auth;
+    const { isAuthenticated } = this.props;
 
     return (
-      <Nav bsStyle="tabs" activeKey={this.state.selected} onSelect={this.handleSelect}>
-        {!isAuthenticated && (
-          <LinkContainer to="/login">
-            <NavItem>
-              Login
-            </NavItem>
-          </LinkContainer>
-        )}
-        {isAuthenticated && (
-          <LinkContainer to="/home">
-            <NavItem>
-              Home
-            </NavItem>
-          </LinkContainer>
-        )}
-        {isAuthenticated && (
-          <LinkContainer to="/protected">
-            <NavItem>
-              My Application
-            </NavItem>
-          </LinkContainer>
-        )}
-        {isAuthenticated && (
-          <LinkContainer to="/portal">
-            <NavItem eventKey={4}>
-              Exhibitor Portal
-            </NavItem>
-          </LinkContainer>
-        )}
-        {isAuthenticated && (
-          <LinkContainer to="/contact">
-            <NavItem eventKey={5}>
-              Contact Us
-            </NavItem>
-          </LinkContainer>
-        )}
-        {isAuthenticated && (
-          <LinkContainer to="/logout">
-            <NavItem>
-              Log Out
-            </NavItem>
-          </LinkContainer>
-        )}
-      </Nav>
+      <Navbar collapseOnSelect>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to="/">
+              Marketplace Managed
+            </Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          {
+            isAuthenticated ? (
+              <LoggedInView
+                logout={this.props.logout} />
+            ) : (
+              <LoggedOutView />
+            )
+          }
+        </Navbar.Collapse>
+      </Navbar>
     );
   }
 }
 
-export default connect(state => ({
-  auth: state.auth
-}))(Navigation);
+function mapStateToProps(state) {
+  const { auth } = state;
+  const { isAuthenticated } = auth;
+
+  return {
+    isAuthenticated
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    logout: () => dispatch(logout())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

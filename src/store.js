@@ -11,7 +11,7 @@ import rootReducer, { defaultState } from './reducers/index';
 export const history = createHistory();
 
 // Build the middleware for intercepting and dispatching navigation actions
-const middleware = routerMiddleware(history);
+const historyMiddleware = routerMiddleware(history);
 
 // Redux Devtools extension
 const composeEnhancers =
@@ -22,7 +22,7 @@ const composeEnhancers =
     }) : compose;
 
 const enhancer = composeEnhancers(
-  applyMiddleware(middleware, thunk),
+  applyMiddleware(historyMiddleware, thunk),
 );
 
 // Add the reducer to your store on the `router` key

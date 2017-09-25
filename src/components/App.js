@@ -8,9 +8,6 @@ const App = ({...props}) => (
   <Grid>
     <Row>
       <Col>
-        <h1>
-          <Link to="/">Exhibitor Management</Link>
-        </h1>
         <Navigation />
       </Col>
     </Row>
