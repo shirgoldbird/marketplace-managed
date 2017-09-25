@@ -27,8 +27,10 @@ REACT_APP_AIRTABLE_BASE=base
 Then:
 ```
 npm install
-npm start
+REACT_APP_AIRTABLE_API_KEY=key REACT_APP_AIRTABLE_BASE=base npm start
 ```
+
+For now we nee to put these environment variables outside fo the `npm start` in order for them to be utilized by the server. Figuring out how to make this not needed is something down the line.
 
 It should be running on localhost:3000.
 
