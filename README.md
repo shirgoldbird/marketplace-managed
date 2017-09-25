@@ -8,8 +8,10 @@ This project was built on node v7.3.0 and npm v5.4.2.
 
 ### Prerequisites
 ```
-node 7.3.0
-npm 5.4.2
+node >=8.5.0
+npm ~5.0.0
+nodemon ~1.12.0
+
 ```
 
 - Airtable API key (for your account)
