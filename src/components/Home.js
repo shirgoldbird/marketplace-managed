@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchDeadlines } from '../actions/deadlineActions';
+import PropTypes from 'prop-types';
 import Deadlines from '../components/Deadlines/Deadlines';
 
-class HomePage extends Component {
-  componentDidMount() {
-    this.props.dispatch(fetchDeadlines());
-  }
+class Home extends Component {
   render() {
     const {
       isAuthenticated,
@@ -30,25 +26,11 @@ class HomePage extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { auth, deadline } = state;
+Home.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  items: PropTypes.array.isRequired
+};
 
-  const {
-    isFetching,
-    items
-  } = deadline;
-
-  const {
-    isAuthenticated,
-    user
-  } = auth
-
-  return {
-    isFetching,
-    items,
-    isAuthenticated,
-    user
-  }
-}
-
-export default connect(mapStateToProps)(HomePage);
+export default Home;

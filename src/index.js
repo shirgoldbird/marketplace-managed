@@ -9,7 +9,7 @@ import registerServiceWorker from './registerServiceWorker';
 import App from './components/App';
 import LoginPage from './pages/Login';
 import LogoutPage from './pages/Logout';
-import HomePage from './pages/Home';
+import HomeContainer from './containers/HomeContainer';
 import Portal from './components/Portal/Portal';
 import Contact from './components/Contact/Contact';
 import PrivateRoute from './components/PrivateRoute';
@@ -30,7 +30,7 @@ const router = (
     <Router history={history}>
       <App>
         <Switch>
-          <Route exact path="/home" component={HomePage} />
+          <Route exact path="/home" component={HomeContainer} />
           <Redirect exact from="/" to="/home" />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/logout" component={LogoutPage} />
