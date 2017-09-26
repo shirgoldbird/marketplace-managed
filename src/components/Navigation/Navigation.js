@@ -8,15 +8,13 @@ import './Navigation.css';
 
 const LoggedOutView = (props) => {
   return (
-    <Navbar.Collapse>
-      <Nav {...props} pullRight>
-        <LinkContainer to="/login">
-          <NavItem eventKey={1}>
-            Login
-          </NavItem>
-        </LinkContainer>
-      </Nav>
-    </Navbar.Collapse>
+    <Nav {...props} pullRight>
+      <LinkContainer to="/login">
+        <NavItem eventKey={1}>
+          Login
+        </NavItem>
+      </LinkContainer>
+    </Nav>
   );
 }
 
@@ -25,9 +23,8 @@ const LoggedInView = (props) => {
     logout,
     ...rest
   } = props;
-  return (
-    <Navbar.Collapse>
-      <Nav {...rest}>
+  return [
+      <Nav key="mainNav" {...rest}>
         <LinkContainer to="/protected">
           <NavItem eventKey={1}>
             My Application
@@ -43,14 +40,13 @@ const LoggedInView = (props) => {
             Contact Us
           </NavItem>
         </LinkContainer>
-      </Nav>
-      <Nav pullRight>
+      </Nav>,
+      <Nav key="logout" pullRight>
         <NavItem onClick={logout}>
           Log Out
         </NavItem>
       </Nav>
-    </Navbar.Collapse>
-  )
+  ];
 }
 
 class Navigation extends Component {
