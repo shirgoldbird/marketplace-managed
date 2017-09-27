@@ -23,12 +23,12 @@ class Deadlines extends Component {
             </thead>
             <tbody>
               {items.map((deadline, i) => {
-                if (deadline["Deadline"]) {
+                if (deadline.name) {
                   return (
-                    <tr className="deadline" key={i}>
-                      <td>{deadline["Deadline"]}</td>
-                      <td>{deadline["Due Date"]}</td>
-                      <td>{deadline["Notes"]}</td>
+                    <tr className="deadline" key={deadline.id}>
+                      <td>{deadline.name}</td>
+                      <td>{deadline.dueDate}</td>
+                      <td>{deadline.notes}</td>
                     </tr>
                   );
                 } else {

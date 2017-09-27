@@ -24,28 +24,28 @@ const LoggedInView = (props) => {
     ...rest
   } = props;
   return [
-      <Nav key="mainNav" {...rest}>
-        <LinkContainer to="/protected">
-          <NavItem eventKey={1}>
-            My Application
-          </NavItem>
-        </LinkContainer>
-        <LinkContainer to="/portal">
-          <NavItem eventKey={2}>
-            Exhibitor Portal
-          </NavItem>
-        </LinkContainer>
-        <LinkContainer to="/contact">
-          <NavItem eventKey={3}>
-            Contact Us
-          </NavItem>
-        </LinkContainer>
-      </Nav>,
-      <Nav key="logout" pullRight>
-        <NavItem onClick={logout}>
-          Log Out
+    <Nav key="mainNav" {...rest}>
+      <LinkContainer to="/protected">
+        <NavItem eventKey={1}>
+          My Application
         </NavItem>
-      </Nav>
+      </LinkContainer>
+      <LinkContainer to="/portal">
+        <NavItem eventKey={2}>
+          Exhibitor Portal
+        </NavItem>
+      </LinkContainer>
+      <LinkContainer to="/contact">
+        <NavItem eventKey={3}>
+          Contact Us
+        </NavItem>
+      </LinkContainer>
+    </Nav>,
+    <Nav key="logout" pullRight>
+      <NavItem onClick={logout}>
+        Log Out
+      </NavItem>
+    </Nav>
   ];
 }
 

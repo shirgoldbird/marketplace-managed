@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const connection = require('../airtable');
-const mapColumns = require('../utils/mapColumns').mapColumns;
+const mapColumns = require('../utils/mapColumns');
 
 router.post('/login', (req, res) => {
   const { legalName, email, zipCode } = req.body;

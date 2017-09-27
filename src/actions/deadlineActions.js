@@ -25,11 +25,11 @@ export function fetchDeadlines() {
       const { deadlines } = response.data;
 
       dispatch(receiveDeadlines(deadlines.sort((a, b) => {
-        if (a["Due Date"] > b["Due Date"]) { 
-          return 1; 
+        if (a.dueDate > b.dueDate) {
+          return 1;
         }
-        else if (a["Due Date"] < b["Due Date"]) { 
-          return -1; 
+        else if (a.dueDate < b.dueDate) {
+          return -1;
         }
         return 0;
       })));

@@ -19,11 +19,18 @@ class Portal extends Component {
             <p>View or download this year's exhibitor documentation here.</p>
             <ul>
               {items.map((link) => {
-                if (link["Link"]) {
+                if (link.url) {
                   return (
                     <li className="portal-link" key={link.id}>
-                      <a href={link["Link"]} target="_blank">{link["Name"]}</a>
-                      {link["Notes"] ? <ul><li>{link["Notes"]}</li></ul> : null}
+                      <a href={link.url} target="_blank">{link.name}</a>
+                      {link.notes ? (
+                        <ul>
+                          <li>
+                            {link.notes}
+                          </li>
+                        </ul>
+                        ) : null
+                      }
                       {/* <Glyphicon className="portal-download" glyph="download-alt" /> */}
                     </li>
                   );
