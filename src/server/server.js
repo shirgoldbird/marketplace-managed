@@ -13,7 +13,10 @@ const PORT_NUMBER = 8081;
 
 const SESSION = {
   secret: 'goodbirbs',
-  cookie: { secure: false },
+  cookie: {
+    secure: false,
+    maxAge: (1000 * 60 * 60 * 2) // two hours
+  },
   saveUninitialized: true,
   resave: true
 };
