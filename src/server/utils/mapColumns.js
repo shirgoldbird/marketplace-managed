@@ -6,30 +6,30 @@ function swap(obj){
   return ret;
 }
 
-const AIRTABLE_TO_PROP_MAP = {
+const PROP_TO_AIRTABLE_MAP = {
   vendors: {
-    'Secondary Websites': 'otherWebsites',
-    'Country': 'country',
-    'What forms of payment do you plan on accepting?': 'paymentTypes',
-    'What is your vending experience?': 'vendingExperience',
-    'Company Type': 'companyType',
-    'Legal Name': 'legalName',
-    'City': 'city',
-    'State/Province/Region': 'state',
-    'What types of goods are you selling?': 'merchTypes',
-    'Primary Website': 'website',
-    'What do you consider to be your primary type of goods?': 'primaryMerchTypes',
-    'Please list any other ways by which we can reach you.': 'otherContactInfo',
-    'Booth Name': 'boothName',
-    'Phone Number': 'phoneNumber',
-    'Address Line 2': 'address2',
-    'ZIP/Postal Code': 'zipCode',
-    'Address Line 1': 'address1',
-    'Feel free to use this space to provide any additional information on your selection of goods.': 'additionalMerchInfo',
-    'Email Address': 'email',
-    'Remaining Badges': 'remainingBadges',
-    'Badge Amount Due': 'badgeAmountDue',
-    'Application Status': 'applicationStatus'
+    otherWebsites: 'Secondary Websites',
+    country: 'Country',
+    paymentTypes: 'What forms of payment do you plan on accepting?',
+    vendingExperience: 'What is your vending experience?',
+    companyType: 'Company Type',
+    legalName: 'Legal Name',
+    city: 'City',
+    state: 'State/Province/Region',
+    merchTypes: 'What types of goods are you selling?',
+    website: 'Primary Website',
+    primaryMerchTypes: 'What do you consider to be your primary type of goods?',
+    otherContactInfo: 'Please list any other ways by which we can reach you.',
+    boothName: 'Booth Name',
+    phoneNumber: 'Phone Number',
+    address2: 'Address Line 2',
+    zipCode: 'ZIP/Postal Code',
+    address1: 'Address Line 1',
+    additionalMerchInfo: 'Feel free to use this space to provide any additional information on your selection of goods.',
+    email: 'Email Address',
+    remainingBadges: 'Remaining Badges',
+    badgeAmountDue: 'Badge Amount Due',
+    applicationStatus: 'Application Status'
   },
   badges: {
 
@@ -38,29 +38,29 @@ const AIRTABLE_TO_PROP_MAP = {
 
   },
   documents: {
-    Name: 'name',
-    Link: 'url',
-    Notes: 'notes',
-    Attachments: 'attachments'
+    name: 'Name',
+    url: 'Link',
+    notes: 'Notes',
+    attachments: 'Attachments'
   },
   deadlines: {
-    Name: 'name',
-    'Due Date': 'dueDate',
-    Notes: 'notes',
-    'Exhibitor Type': 'exhibitor_type'
+    name: 'Name',
+    dueDate: 'Due Date',
+    notes: 'Notes',
+    exhibitor_type: 'Exhibitor Type'
   },
   emails: {
 
   }
 }
 
-const PROP_TO_AIRTABLE_MAP = {
-  vendors: swap(AIRTABLE_TO_PROP_MAP.vendors),
-  badges: swap(AIRTABLE_TO_PROP_MAP.vendors),
-  sales_tax_info: swap(AIRTABLE_TO_PROP_MAP.vendors),
-  documents: swap(AIRTABLE_TO_PROP_MAP.vendors),
-  deadlines: swap(AIRTABLE_TO_PROP_MAP.vendors),
-  emails: swap(AIRTABLE_TO_PROP_MAP.vendors)
+const AIRTABLE_TO_PROP_MAP = {
+  vendors: swap(PROP_TO_AIRTABLE_MAP.vendors),
+  badges: swap(PROP_TO_AIRTABLE_MAP.vendors),
+  sales_tax_info: swap(PROP_TO_AIRTABLE_MAP.vendors),
+  documents: swap(PROP_TO_AIRTABLE_MAP.vendors),
+  deadlines: swap(PROP_TO_AIRTABLE_MAP.vendors),
+  emails: swap(PROP_TO_AIRTABLE_MAP.vendors)
 }
 
 function mapColumns(obj = {}, table = 'vendors', toJS = true) {
