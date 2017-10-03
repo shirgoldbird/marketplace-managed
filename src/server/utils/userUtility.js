@@ -12,7 +12,7 @@ function newUser(fields) {
   // Shallow copy the user object to avoid reference woes.
   // NB: Don't put any objects in here that you don't want sharing references.
   // Arrays are special-cased.
-  var user = {};
+  let user = {};
   Object.keys(fields).map(key => {
     if(Array.isArray(fields[key])) {
       user[key] = fields[key].slice();
@@ -22,11 +22,13 @@ function newUser(fields) {
   });
 
   // Set defaults.
-  if(user.permissions === undefined) user.permissions = [];
+  if(user.permissions === undefined) {
+    user.permissions = [];
+  }
 
   // Create a permission set for faster lookups.
   user.perms = {};
-  for(var i = 0; i < user.permissions.length; i++) {
+  for(let i = 0; i < user.permissions.length; i++) {
     user.perms[user.permissions[i]] = true;
   }
 
@@ -38,9 +40,9 @@ function newUser(fields) {
   return user;
 }
 
-const PERM = {
+const PERMISSION = {
   ROOT: 'Do Absolutely Everything',
-  LOGIN: 'Login',
+  LOGIN: 'Login'
 };
 
 /* Check if a user has a permission.
@@ -56,13 +58,16 @@ const PERM = {
  *
  * Invalid users "possess" no permissions.
  */
-function hasPerm(user, perm) {
-  if(!user || typeof user !== 'object' || user.perms === undefined) return false;
-  return (user.perms[PERM.ROOT] === true) || (user.perms[perm] === true);
+function hasPermission(user = {}, perm) {
+  if(user.perms === undefined) {
+    return false;
+  }
+
+  return (user.perms[PERMISSION.ROOT] === true) || (user.perms[perm] === true);
 }
 
 module.exports = {
-  newUser: newUser,
-  hasPerm: hasPerm,
-  PERM: PERM,
+  newUser,
+  hasPermission,
+  PERMISSION
 };

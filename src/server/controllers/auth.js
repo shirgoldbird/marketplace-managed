@@ -3,7 +3,7 @@ const router = express.Router();
 
 const connection = require('../airtable');
 const mapColumns = require('../utils/mapColumns');
-const user = require('../utils/user');
+const userUtility = require('../utils/userUtility');
 
 router.post('/login', (req, res) => {
   const { legalName, email, zipCode } = req.body;
@@ -30,14 +30,15 @@ router.post('/login', (req, res) => {
       });
     } 
     else {
-      var u = user.newUser(mapColumns(records[0].fields, 'auth'));
-      if(!user.hasPerm(u, user.PERM.LOGIN)) {
+      const user = userUtility.newUser(mapColumns(records[0].fields, 'auth'));
+      if(!userUtility.hasPermission(user, userUtility.PERMISSION.LOGIN)) {
         res.status(403).json({
-          message: "You are not permitted to " + user.PERM.LOGIN,
+          message: "You are not permitted to " + userUtility.PERMISSION.LOGIN,
         });
-      } else {
+      }
+      else {
         req.session.authenticated = true;
-        req.session.user = u;
+        req.session.user = user;
         res.json({
           user: req.session.user
         });

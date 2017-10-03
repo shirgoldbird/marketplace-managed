@@ -29,7 +29,7 @@ const PROP_TO_AIRTABLE_MAP = {
     email: 'Email Address',
     remainingBadges: 'Remaining Badges',
     badgeAmountDue: 'Badge Amount Due',
-    applicationStatus: 'Application Status',
+    applicationStatus: 'Application Status'
   },
   badges: {
 
@@ -57,8 +57,8 @@ const PROP_TO_AIRTABLE_MAP = {
     legalName: 'Legal Name',
     email: 'Email Address',
     permissions: 'Permissions',
-    vendors: 'Vendors',
-  },
+    vendors: 'Vendors'
+  }
 }
 
 const AIRTABLE_TO_PROP_MAP = {
@@ -68,7 +68,7 @@ const AIRTABLE_TO_PROP_MAP = {
   documents: swap(PROP_TO_AIRTABLE_MAP.vendors),
   deadlines: swap(PROP_TO_AIRTABLE_MAP.vendors),
   emails: swap(PROP_TO_AIRTABLE_MAP.vendors),
-  auth: swap(PROP_TO_AIRTABLE_MAP.auth),
+  auth: swap(PROP_TO_AIRTABLE_MAP.auth)
 }
 
 function mapColumns(obj = {}, table = 'vendors', toJS = true) {
