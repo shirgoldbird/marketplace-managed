@@ -51,13 +51,6 @@ const PROP_TO_AIRTABLE_MAP = {
   },
   emails: {
 
-  },
-  auth: {
-    zipCode: 'ZIP Code',
-    legalName: 'Legal Name',
-    email: 'Email Address',
-    permissions: 'Permissions',
-    vendors: 'Vendors'
   }
 }
 
@@ -67,8 +60,7 @@ const AIRTABLE_TO_PROP_MAP = {
   sales_tax_info: swap(PROP_TO_AIRTABLE_MAP.vendors),
   documents: swap(PROP_TO_AIRTABLE_MAP.vendors),
   deadlines: swap(PROP_TO_AIRTABLE_MAP.vendors),
-  emails: swap(PROP_TO_AIRTABLE_MAP.vendors),
-  auth: swap(PROP_TO_AIRTABLE_MAP.auth)
+  emails: swap(PROP_TO_AIRTABLE_MAP.vendors)
 }
 
 function mapColumns(obj = {}, table = 'vendors', toJS = true) {

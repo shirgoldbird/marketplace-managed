@@ -10,12 +10,12 @@ router.post('/login', (req, res) => {
   const loginFormula = `
     AND({Legal Name} = '${legalName}', 
     {Email Address} = '${email}', 
-    {ZIP Code} = '${zipCode}')
+    {ZIP/Postal Code} = '${zipCode}')
   `;
 
   // TODO: figure out how to deal with allowing both vendors and artists to log in before the tables are combined
   // maybe we just don't let artists log in before they're selected for AA and we add them to a central "Exhibitor" table
-  connection('Auth').select({
+  connection('Vendors').select({
     filterByFormula: loginFormula,
     maxRecords: 1
   }).firstPage((err, records) => {
@@ -30,19 +30,11 @@ router.post('/login', (req, res) => {
       });
     } 
     else {
-      const user = userUtility.newUser(mapColumns(records[0].fields, 'auth'));
-      if(!userUtility.hasPermission(user, userUtility.PERMISSION.LOGIN)) {
-        res.status(403).json({
-          message: "You are not permitted to " + userUtility.PERMISSION.LOGIN,
-        });
-      }
-      else {
-        req.session.authenticated = true;
-        req.session.user = user;
-        res.json({
-          user: req.session.user
-        });
-      }
+      req.session.authenticated = true;
+      req.session.user = userUtility.newUser(mapColumns(records[0].fields));
+      res.json({
+        user: req.session.user
+      });
     }
   });
 });
