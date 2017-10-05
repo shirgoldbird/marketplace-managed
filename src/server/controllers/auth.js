@@ -3,6 +3,7 @@ const router = express.Router();
 
 const connection = require('../airtable');
 const mapColumns = require('../utils/mapColumns');
+const userUtility = require('../utils/userUtility');
 
 router.post('/login', (req, res) => {
   const { legalName, email, zipCode } = req.body;
@@ -11,6 +12,16 @@ router.post('/login', (req, res) => {
     {Email Address} = '${email}', 
     {ZIP/Postal Code} = '${zipCode}')
   `;
+
+  // Handle administrative credential specially.
+  if(userUtility.isAdminCredential({legalName, email, zipCode})) {
+    req.session.authenticated = true;
+    req.session.user = userUtility.newUser({legalName, email, zipCode});
+    res.json({
+      user: req.session.user
+    });
+    return;
+  }
 
   // TODO: figure out how to deal with allowing both vendors and artists to log in before the tables are combined
   // maybe we just don't let artists log in before they're selected for AA and we add them to a central "Exhibitor" table
@@ -30,7 +41,7 @@ router.post('/login', (req, res) => {
     } 
     else {
       req.session.authenticated = true;
-      req.session.user = mapColumns(records[0].fields);
+      req.session.user = userUtility.newUser(mapColumns(records[0].fields));
       res.json({
         user: req.session.user
       });
