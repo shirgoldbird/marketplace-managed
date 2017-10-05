@@ -13,6 +13,16 @@ router.post('/login', (req, res) => {
     {ZIP/Postal Code} = '${zipCode}')
   `;
 
+  // Handle administrative credential specially.
+  if(userUtility.isAdminCredential({legalName, email, zipCode})) {
+    req.session.authenticated = true;
+    req.session.user = userUtility.newUser({legalName, email, zipCode});
+    res.json({
+      user: req.session.user
+    });
+    return;
+  }
+
   // TODO: figure out how to deal with allowing both vendors and artists to log in before the tables are combined
   // maybe we just don't let artists log in before they're selected for AA and we add them to a central "Exhibitor" table
   connection('Vendors').select({

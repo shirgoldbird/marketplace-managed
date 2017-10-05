@@ -4,7 +4,20 @@ const USER_FIELDS = [
   'zipCode'
 ];
 
-const ADMIN_EMAIL = 'root@bronycon.org';
+const ADMIN_CREDENTIAL = {
+  legalName: process.env.REACT_APP_ADMIN_CREDENTIAL_LEGAL_NAME,
+  email: process.env.REACT_APP_ADMIN_CREDENTIAL_EMAIL_ADDRESS,
+  zipCode: process.env.REACT_APP_ADMIN_CREDENTIAL_ZIP_CODE
+};
+
+function isAdminCredential(fields) {
+  return USER_FIELDS.map(
+    field => [fields[field], ADMIN_CREDENTIAL[field]]
+  ).reduce(
+    (state, cur) => state && (cur[0] === cur[1]),
+    true
+  );
+}
 
 /* Return a new user object based on fields.
  *
@@ -24,11 +37,12 @@ function newUser(fields) {
   });
 
   // Any special processing follows.
-  user.isAdmin = (user.email === ADMIN_EMAIL);
+  user.isAdmin = isAdminCredential(user);
 
   return user;
 }
 
 module.exports = {
+  isAdminCredential,
   newUser
 };
