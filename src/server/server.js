@@ -7,6 +7,7 @@ const authMiddleware = require('./authMiddleware');
 const auth = require('./controllers/auth');
 const documents = require('./controllers/documents');
 const deadlines = require('./controllers/deadlines');
+const paypal = require('./controllers/paypal');
 
 const app = express();
 const PORT_NUMBER = 8081;
@@ -29,12 +30,13 @@ const CORS_CONFIG = {
 // Middleware
 app.use(session(SESSION));
 app.use(bodyParser.json());
-app.use(authMiddleware);
+// app.use(authMiddleware);
 
 // Routes
 app.use('/auth', cors(CORS_CONFIG), auth);
 app.use('/documents', cors(CORS_CONFIG), documents);
 app.use('/deadlines', cors(CORS_CONFIG), deadlines);
+app.use('/paypal', cors(CORS_CONFIG), paypal);
 
 const server = app.listen(PORT_NUMBER, () => {
   const { port } = server.address();
